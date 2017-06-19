@@ -9,15 +9,21 @@ body {
   height: 100%;
 }
 
+#bs-example-navbar-collapse-1 {
+  height:68px;
+}
+
 .navbar-right {
   font-size: 20px;
   padding: 10px 20px;
   line-height: 1em;
   height: 100%;
+  margin-top: 18px;
+
 }
 
 .sg {
-  color: red;
+  color: #d13131;
 }
 
 a {
