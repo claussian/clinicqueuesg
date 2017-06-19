@@ -1,5 +1,20 @@
-body {
+html, body {
   padding: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+#map-container, #map-container .row{
+  height: 100%
+}
+
+#map {
+  height: 100%;
+  overflow: auto;
+}
+
+.navbar {
+  margin-bottom: 0;
 }
 
 .navbar-brand {
