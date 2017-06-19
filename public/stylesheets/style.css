@@ -1,0 +1,25 @@
+body {
+  padding: 0px;
+}
+
+.navbar-brand {
+  font-size: 40px;
+  padding: 10px 20px;
+  line-height: 1.2em;
+  height: 100%;
+}
+
+.navbar-right {
+  font-size: 20px;
+  padding: 10px 20px;
+  line-height: 1em;
+  height: 100%;
+}
+
+.sg {
+  color: red;
+}
+
+a {
+  color: #00B7FF;
+}
