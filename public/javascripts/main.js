@@ -45,7 +45,7 @@ function initMap() {
       path: google.maps.SymbolPath.CIRCLE,
       fillColor: 'red',
       fillOpacity: 0.5,
-      scale: queue/5,
+      scale: Math.sqrt(queue)*2,
       //scale: Math.pow(2, queue) / 2,
       strokeColor: 'white',
       strokeWeight: .5
@@ -56,16 +56,40 @@ function initMap() {
 function eqfeed_callback(results) {
     // map.data.addGeoJson(results);
     // console.log(results);
+
+    /* Instantiate single instance of infowindow */
+    var infowindow = new google.maps.InfoWindow();
+
+    /* Function to place marker and open infowindow */
+    function placeMarker(coords, queue, infopanel) {
+      var latLng = new google.maps.LatLng(coords[1], coords[0]);
+      var marker = new google.maps.Marker({
+        position : latLng,
+        map: map,
+        icon: getCircle(queue)
+      });
+      google.maps.event.addListener(marker, 'click', function(){
+        infowindow.close(); // Close previously opened infowindow
+        infowindow.setContent(infopanel);
+        infowindow.open(map, marker);
+      });
+    }
+    var infowindow = new google.maps.InfoWindow();
     for (var i = 0; i < results.features.length; i++) {
           var coords = results.features[i].geometry.coordinates;
-          var latLng = new google.maps.LatLng(coords[1],coords[0]);
           var queue = parseInt(results.features[i].properties.queue);
-          var marker = new google.maps.Marker({
-              position: latLng,
-              map: map,
-              icon: getCircle(queue)
-            });
+
+          // Add panel content on hover
+          var infopanel = $('#infopanel').html();
+          infopanel = infopanel.replace('{{clinicname}}', results.features[i].properties.name_full);
+          infopanel = infopanel.replace('{{queue}}',queue).replace('{{waittime}}',results.features[i].properties.waitTime);
+
+          // /* Point a new reference to new infopanel */
+          // var clone = JSON.parse(JSON.stringify(infopanel));
+          // iw.push(clone);
+          placeMarker(coords, queue, infopanel);
         };
+
 }
 
 
@@ -73,11 +97,11 @@ function initFeatures() {
 
 }
 
-
 /* Initialise document for JQuery */
 $(document).ready(function() {
   console.log('document loaded');
-  // initMap();
+  initMap();
+  // async='', defer='',
 
   /* init FeatureCollection */
 

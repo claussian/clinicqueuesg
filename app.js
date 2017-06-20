@@ -5,12 +5,21 @@ import express from 'express';
 import logger from 'morgan';
 // import favicon from 'serve-favicon';
 import path from 'path';
+import dotenv from 'dotenv';
 import lessMiddleware from 'less-middleware';
 import clinicRoutes from './routes/index';
 import mongoose from 'mongoose';
 
+// Configure .env path
+dotenv.load({path: '.env'});
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/test');
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+mongoose.connection.on('error', (err) => {
+  console.error(err);
+  console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
+  process.exit();
+});
 
 const app = express();
 const debug = Debug('clinicqueuesg:app');
