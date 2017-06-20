@@ -16,6 +16,16 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), mapOptions);
 }
 
+function initFeatures() {
+  $.ajax({
+    method: 'GET',
+    url: '/load'
+  })
+  .done(function(data) {
+    console.log(data); // render points here
+  });
+}
+
 
 
 
@@ -23,4 +33,8 @@ function initMap() {
 $(document).ready(function() {
   console.log('document loaded');
   initMap();
-})
+  initFeatures();
+
+  /* init FeatureCollection */
+
+});

@@ -6,7 +6,11 @@ import logger from 'morgan';
 // import favicon from 'serve-favicon';
 import path from 'path';
 import lessMiddleware from 'less-middleware';
-import index from './routes/index';
+import clinicRoutes from './routes/index';
+import mongoose from 'mongoose';
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/test');
 
 const app = express();
 const debug = Debug('clinicqueuesg:app');
@@ -27,7 +31,7 @@ app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/', clinicRoutes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

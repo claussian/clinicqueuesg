@@ -1,0 +1,253 @@
+{"type":"FeatureCollection","features":[
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.945916, 1.357416]
+    },
+    "properties": {
+      "name": "TMP",
+      "name_full": "Tampines Polyclinic",
+      "time_created" : "2017-06-19 15:43:34.081701",
+      "queue" : "140",
+      "cluster" : "SHP",
+      "waitTime" : "2 hours 20 mins"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.894326, 1.392693]
+    },
+    "properties": {
+      "name": "SKP",
+      "name_full": "Sengkang Polyclinic",
+      "time_created" : "2017-06-19 15:43:27.629812",
+      "queue" : "72",
+      "cluster" : "SHP",
+      "waitTime" : "2 hours 7 mins"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.801048, 1.298412]
+    },
+    "properties": {
+      "name": "QTP",
+      "name_full": "Queenstown Polyclinic",
+      "time_created" : "2017-06-19 15:43:19.846694",
+      "queue" : "48",
+      "cluster" : "SHP",
+      "waitTime" : "1 hour 56 mins"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.959221, 1.368426]
+    },
+    "properties": {
+      "name": "PRP",
+      "name_full": "Pasir Ris Polyclinic",
+      "time_created" : "2017-06-19 15:43:00.689213",
+      "queue" : "52",
+      "cluster" : "SHP",
+      "waitTime" : "1 hour 59 mins"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.838369, 1.279555]
+    },
+    "properties": {
+      "name": "OUP",
+      "name_full": "Outram Polyclinic",
+      "time_created" : "2017-06-19 15:42:53.929184",
+      "queue" : "88",
+      "cluster" : "SHP",
+      "waitTime" : "2 hours 4 mins"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.907768, 1.302499]
+    },
+    "properties": {
+      "name": "MPP",
+      "name_full": "Marine Parade Polyclinic",
+      "time_created" : "2017-06-19 15:42:48.245485",
+      "queue" : "52",
+      "cluster" : "SHP",
+      "waitTime" : "2 hours 5 mins"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.887157, 1.319476]
+    },
+    "properties": {
+      "name": "GLP",
+      "name_full": "Geylang Polyclinic",
+      "time_created" : "2017-06-19 15:42:43.992718",
+      "queue" : "115",
+      "cluster" : "SHP",
+      "waitTime" : "2 hours 45 mins"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.816899, 1.283875]
+    },
+    "properties": {
+      "name": "BMP",
+      "name_full": "Bukit Merah Polyclinic",
+      "time_created" : "2017-06-19 15:42:30.489550",
+      "queue" : "58",
+      "cluster" : "SHP",
+      "waitTime" : "2 hours 5 mins"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.931665, 1.325887]
+    },
+    "properties": {
+      "name": "BDP",
+      "name_full": "Bedok Polyclinic",
+      "time_created" : "2017-06-19 15:42:21.886639",
+      "queue" : "72",
+      "cluster" : "SHP",
+      "waitTime" : "2 hours 26 mins"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.838382, 1.426599]
+    },
+    "properties": {
+      "name": "yis",
+      "name_full": "Yishun Polyclinic",
+      "time_created" : "2017-06-19 15:42:17.056287",
+      "queue" : "193",
+      "cluster" : "NHG",
+      "waitTime" : "null"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.775173, 1.430948]
+    },
+    "properties": {
+      "name": "wds",
+      "name_full": "Woodlands Polyclinic",
+      "time_created" : "2017-06-19 15:42:15.454232",
+      "queue" : "123",
+      "cluster" : "NHG",
+      "waitTime" : "null"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.858847, 1.334604]
+    },
+    "properties": {
+      "name": "tpy",
+      "name_full": "Toa Payoh Polyclinic",
+      "time_created" : "2017-06-19 15:42:14.107223",
+      "queue" : "107",
+      "cluster" : "NHG",
+      "waitTime" : "null"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.730619, 1.349792]
+    },
+    "properties": {
+      "name": "jur",
+      "name_full": "Jurong Polyclinic",
+      "time_created" : "2017-06-19 15:42:12.553756",
+      "queue" : "147",
+      "cluster" : "NHG",
+      "waitTime" : "null"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.889024, 1.370032]
+    },
+    "properties": {
+      "name": "hou",
+      "name_full": "Hougang Polyclinic",
+      "time_created" : "2017-06-19 15:42:11.053616",
+      "queue" : "137",
+      "cluster" : "NHG",
+      "waitTime" : "null"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.765739, 1.312803]
+    },
+    "properties": {
+      "name": "clm",
+      "name_full": "Clementi Polyclinic",
+      "time_created" : "2017-06-19 15:42:09.579076",
+      "queue" : "69",
+      "cluster" : "NHG",
+      "waitTime" : "null"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.75083, 1.382360]
+    },
+    "properties": {
+      "name": "cck",
+      "name_full": "Choa Chu Kang Polyclinic",
+      "time_created" : "2017-06-19 15:42:08.003740",
+      "queue" : "124",
+      "cluster" : "NHG",
+      "waitTime" : "null"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.747924, 1.351972]
+    },
+    "properties": {
+      "name": "bbk",
+      "name_full": "Bukit Batok Polyclinic",
+      "time_created" : "2017-06-19 15:42:06.570208",
+      "queue" : "89",
+      "cluster" : "NHG",
+      "waitTime" : "null"
+    }
+  },
+  {"type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [103.847321, 1.372303]
+    },
+    "properties": {
+      "name": "amk",
+      "name_full": "Ang Mo Kio Polyclinic",
+      "time_created" : "2017-06-19 15:42:05.168814",
+      "queue" : "130",
+      "cluster" : "NHG",
+      "waitTime" : "null"
+    }
+  }]}
