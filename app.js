@@ -48,7 +48,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
 /* passport and session */
-app.use(session( {secret: 'secret-name'}));
+app.use(session( {secret: 'secret-name',
+    name: 'cookie_name',
+    resave: true,
+    saveUninitialized: true
+  }));
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);

@@ -1,5 +1,6 @@
 import Polyclinic from '../models/Polyclinic'
 import Privateclinic from '../models/Privateclinic'
+var cloudinary = require('cloudinary');
 
 /*************************/
 /* Render pages */
@@ -65,10 +66,23 @@ exports.listPrivateNames = (req, res) => {
   });
 }
 
-/*********************************/
+/**********************************/
 /* Update photos in private clinic*/
-/*********************************/
+/**********************************/
 
+exports.updatePhoto = (req, res) => {
+  cloudinary.uploader.upload(req.file.path, function (result) {
+      Privateclinic.findOneAndUpdate({
+        'properties.name': req.body
+      }, {
+        'properties.queueImg': result.secure_url,
+        'properties.timestamp': new Date()
+      }, (err) => {
+        if (err) throw err
+        res.redirect('/report');
+      });
+    });
+  }
 // cloudinary.uploader.upload("my_picture.jpg", function(result) {
 //   console.log(result)
 // });

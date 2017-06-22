@@ -46,6 +46,14 @@ function initMap() {
       });
   }
 
+  function dateFormatter(date) {
+    var datetime = date;
+    var time = datetime.toTimeString().split(' ')[0];
+    var date = datetime.toDateString().split(' ');
+    var dateformatted = time + ' ' + date[0] + ' ' + date[1] + ' ' + date[2];
+    return dateformatted;
+  }
+
   function getCircle(queue) {
     // console.log(queue);
     return {
@@ -86,15 +94,13 @@ function eqfeed_callback(results) {
     for (var i = 0; i < results.features.length; i++) {
           var coords = results.features[i].geometry.coordinates;
           var queue = parseInt(results.features[i].properties.queue);
-          var datetime = new Date(results.features[i].properties.time_created);
-          time = datetime.toTimeString().split(' ')[0];
-          date = datetime.toDateString().split(' ');
+          var newDateTime = dateFormatter(new Date(results.features[i].properties.time_created));
 
           // Add panel content on hover
           var infopanel = $('#infopanel').html();
           infopanel = infopanel.replace('{{clinicname}}', results.features[i].properties.name_full);
           infopanel = infopanel.replace('{{queue}}',queue).replace('{{waittime}}',results.features[i].properties.waitTime);
-          infopanel = infopanel.replace('{{time_created}}',time + ' ' + date[0] + ' ' + date[1] + ' ' + date[2]);
+          infopanel = infopanel.replace('{{time_created}}',newDateTime);
           // /* Point a new reference to new infopanel */
           // var clone = JSON.parse(JSON.stringify(infopanel));
           // iw.push(clone);
@@ -122,14 +128,14 @@ function initTypeAheadPrivateClinics() {
 }
  /* reverse geocode a clinic coordinate */
 function codeAddress() {
-    var address = $('#query-clinic').val();
+    var clinicname = $('#query-clinic').val();
     // console.log(address);
     $.ajax({
       method:'GET',
       url: '/loadPrivate'
     }).done(function (data) {
       var clinic = data.filter(function(elem){
-        return elem.properties.Name == address;
+        return elem.properties.Name == clinicname;
       });
       console.log(clinic[0].geometry.coordinates);
       var coord = clinic[0].geometry.coordinates;
@@ -139,13 +145,23 @@ function codeAddress() {
         if (status === 'OK') {
           if (results[1]) {
             map.setZoom(15);
+            /* pin drop */
             var marker = new google.maps.Marker({
               position: latlng,
               map: map,
               icon: '../images/chas-transparent-small.png'
             });
+            /* center map to new clinic location */
             var newll = new google.maps.LatLng(latlng);
             map.panTo(newll);
+            /* add content to chaspanel */
+            var chaspanel = $('#chaspanel').html();
+            chaspanel = chaspanel.replace('{{clinicname}}',clinicname).replace('{{address}}',results[1].formatted_address);
+            chaspanel = chaspanel.replace('{{datetime}}', dateFormatter(new Date()));
+            /* add infowindow */
+            var infowindow = new google.maps.InfoWindow();
+            infowindow.setContent(chaspanel);
+            infowindow.open(map, marker);
           } else {
             window.alert('No results found');
           }
@@ -167,6 +183,23 @@ function codeAddress() {
     //     alert('Geocode was not successful for the following reason: ' + status);
     //   }
     //});
+  }
+
+  /**
+ * Upload the photos using ajax request.
+ *
+ * @param formData
+ */
+ function uploadImage(formData) {
+    $.ajax({
+        url: '/report',
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+    }).fail(function (status) {
+        alert(status);
+    });
   }
 
 /* Initialise document for JQuery */
@@ -214,17 +247,52 @@ $(document).ready(function() {
     });
   });
 
+  /*******************/
+  /* FORM SUBMISSION */
+  /*******************/
+
   /* Select a file and update field*/
-  $(':file').on('fileselect', function() {
-    var input = $(this);
-    var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+  $('#photo-input').on('change', function(event) {
+    var input = $(event.target).get(0).files[0].name;
+    //console.log(input);
+    var label = input.replace(/\\/g, '/').replace(/.*\//, '');
     $('.file-display').val(label);
   });
 
-  /* Geocode the added clinics */
+  /* Reverse-geocode the added clinics */
   $('#query-button').on('click', function(event) {
     codeAddress();
   });
+
+  /* Attach event listener to form submit */
+  $('#submit-photo').submit( function (event) {
+    // event.stopPropagation();
+    event.preventDefault();
+    // var formData = new FormData($(this)[0]);
+    // console.log(formData);
+    // Get the files from input, create new FormData.
+    var filesdat = $('#photo-input').get(0).files,
+    formData = new FormData();
+
+    //console.log(filesdat);
+
+    if (filesdat.length === 0) {
+        alert('Select a photo to upload.');
+        return false;
+    }
+    else if (filesdat.length > 1) {
+        alert('You can only upload 1 photo. Please clear the form');
+        return false;
+    }
+    else {
+      formData.append('properties.name', $('#query-clinic').val());
+      formData.append('queueImg', filesdat[0], filesdat[0].name);
+      // uploadFiles(formData);
+      console.log(formData);
+    }
+
+
+});
 
 
 

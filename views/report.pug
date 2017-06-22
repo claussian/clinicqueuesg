@@ -16,7 +16,7 @@ block content
       .col-md-4.queue-report
         .container-fluid.form-container
           .row.well.well-lg
-            form.form-horizontal(action='/report', method='POST', enctype='multipart/form-data')
+            form#submit-photo.form-horizontal(enctype='multipart/form-data')
               fieldset
                 legend.legend-container Submit a clinic queue report!
                 label.control-label(for='inputPassword') Clinic name
@@ -28,17 +28,17 @@ block content
                       span.typeahead__button
                         button#query-button(type='button')
                           span.typeahead__search-icon
-                .form-group.form-group-photo
-                  label.control-label(for='inputPassword') Upload a clear photo of the clinic queue
-                  .input-group
-                    label.input-group-btn
-                      span.btn.btn-primary
-                        | Browse… 
-                        input(type='file', style='display: none;', multiple='')
-                    input.form-control.file-display(type='text', readonly='')
-                .form-group
-                  .col-lg-12
-                    button.btn.btn-default.btn-form(type='reset') Cancel
-                    button.btn.btn-info.btn-form(type='submit') Submit
+                  .form-group.form-group-photo
+                    label.control-label(for='inputPhoto') Upload a clear photo of the clinic queue
+                    .input-group
+                      label.input-group-btn
+                        span.btn.btn-primary
+                          | Browse… 
+                          input#photo-input(type='file', style='display:none', multiple='')
+                      input.form-control.file-display(type='text', readonly='')
+                  .form-group
+                    .col-lg-12
+                      button.btn.btn-default.btn-form(type='reset') Cancel
+                      button.btn.btn-info.btn-form(type='submit') Submit
           
         

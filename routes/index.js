@@ -43,6 +43,9 @@ router.get('/loadPolyNames', clinicsController.listPolyNames);
 /* GET private clinic names JSON */
 router.get('/loadPrivateNames', clinicsController.listPrivateNames);
 
+/* POST private clinic photo */
+router.post('/report', clinicsController.updatePhoto);
+
 module.exports = router;
 
 // router.get('/', (req, res, next) => {
