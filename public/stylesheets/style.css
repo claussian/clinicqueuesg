@@ -62,6 +62,16 @@ a:active {
   margin-right: 10px;
 }
 
+.well-signup {
+  background-color: #E6F1FF;
+}
+
+.footer {
+  position: fixed;
+  bottom:0px
+  left:0px;
+}
+
 
 
 .pin {

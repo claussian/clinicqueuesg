@@ -1,6 +1,13 @@
 var geocoder;
 var map;
 
+/*****************************/
+/* Check whether to load Map */
+/*****************************/
+function mapExists() {
+  return $('#map').length > 0 ? true : false;
+}
+
 /************************************************/
 /* Initialise map at SG central water catchment */
 /************************************************/
@@ -52,7 +59,7 @@ function initMap() {
     };
   }
 
-// 'results' is a placeholder; eqfeed_callback() is executed when geoJSON script loads upon completion of AJAX call
+/* 'results' is a data placeholder; eqfeed_callback() is executed when geoJSON object loads upon completion of AJAX */
 function eqfeed_callback(results) {
     // map.data.addGeoJson(results);
     // console.log(results);
@@ -74,7 +81,7 @@ function eqfeed_callback(results) {
         infowindow.open(map, marker);
       });
     }
-
+    /* Attach infowindows */
     var infowindow = new google.maps.InfoWindow();
     for (var i = 0; i < results.features.length; i++) {
           var coords = results.features[i].geometry.coordinates;
@@ -104,24 +111,43 @@ function initFeatures() {
 /* Initialise document for JQuery */
 $(document).ready(function() {
   console.log('document loaded');
-  initMap();
-  // async='', defer='',
+  if(mapExists()) {
+    initMap();
+  }
 
   /* Set up event listeners */
-  // $('.navbar-brand').on('click', function(event){
-  //   $.ajax({
-  //     method: 'GET',
-  //     url: '/'
-  //   });
-  // });
-  //
-  // $('.goto-login').on('click', function(event){
-  //   $.ajax({
-  //     method: 'GET',
-  //     url: '/login'
-  //   }).done(function(response){
-  //     console.log('success go to login',response);
-  //   });
-  // });
+
+  /* Password match validator */
+  $('#inputPassword-signup-val').on('keyup', function(event) {
+    if($(event.target).val() == $('#inputPassword-signup').val()) {
+      $('#password-validate').removeClass('has-error');
+      $('#password-validate').addClass('has-success');
+    }
+    else {
+      $('#password-validate').removeClass('has-error');
+      $('#password-validate').addClass('has-error');
+    }
+  });
+  /* Clear stylings on cancel */
+  $('#cancel-btn').on('click', function(event) {
+    $('#password-validate').removeClass('has-error');
+    $('#password-validate').removeClass('has-success');
+  });
+  /* Submit new user */
+  $('#submit-signup').on('click', function(event) {
+    var email = $('#inputEmail-signup').val();
+    var password = $('inputPassword-signup-val').val();
+    var userData = {
+      email: email,
+      password: password
+    };
+    $.ajax({
+      method: 'POST',
+      url: '/signup',
+      data: userData
+    }).done(function(data){
+      console.log('done');
+    });
+  });
 
 });

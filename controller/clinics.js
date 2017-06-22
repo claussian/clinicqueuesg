@@ -13,7 +13,13 @@ exports.login = (req, res) => {
     res.render('login');
 }
 
+exports.signup = (req, res) => {
+    res.render('signup');
+}
 
+exports.report = (req, res) => {
+    res.render('report');
+}
 
 /********************************/
 /* Return array of JSON objects */

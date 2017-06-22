@@ -14,17 +14,17 @@ block content
     .row.justify-content-center.well.well-lg
         form.form-horizontal
           fieldset
-            legend.legend-container Submit a queue report by logging in. Not registered yet?
-              a(href='#')  Sign up here
+            legend.legend-container Submit a clinic queue report by logging in. Not registered yet?
+              a(href='/signup')  Sign up here
             .form-group
               label.col-lg-3.control-label(for='inputEmail') Email
               .col-lg-6
-                input#inputEmail.form-control(type='text', placeholder='Email')
+                input#inputEmail-login.form-control(type='text', placeholder='Email', name='email')
               .col-lg-3
             .form-group
               label.col-lg-3.control-label(for='inputPassword') Password
               .col-lg-6
-                input#inputPassword.form-control(type='password', placeholder='Password')
+                input#inputPassword-login.form-control(type='password', placeholder='Password', name='password')
               .col-lg-3
             .form-group
               .col-lg-6.col-lg-offset-3

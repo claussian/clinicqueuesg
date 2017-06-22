@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  nav.navbar.navbar-default.navbar-static-top
+    .container-fluid
+      .navbar-header
+        a.navbar-brand(href='/') ClinicQueues
+          span.sg SG
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        .nav.navbar-nav.navbar-right
+          p
+            a(href='/login') Back to login
+  .container.form-container
+    .row.justify-content-center.well.well-lg.well-signup
+        form.form-horizontal(method='POST', action='/signup')
+          fieldset
+            legend.legend-container Create a new account
+            .form-group
+              label.col-lg-3.control-label(for='inputEmail') Your email
+              .col-lg-6
+                input#inputEmail-signup.form-control(type='text', placeholder='Enter your email here', name='email')
+              .col-lg-3
+            .form-group
+              label.col-lg-3.control-label(for='inputPassword') Choose password
+              .col-lg-6
+                input#inputPassword-signup.form-control(type='password', placeholder='Enter your password here', name='password')
+              .col-lg-3
+            #password-validate.form-group
+              label.col-lg-3.control-label(for='inputPassword') Re-enter password
+              .col-lg-6
+                input#inputPassword-signup-val.form-control(type='password', placeholder='Re-enter your password here')
+              .col-lg-3
+            .form-group
+              .col-lg-6.col-lg-offset-3
+                button#cancel-btn.btn.btn-default.btn-form(type='reset') Cancel
+                button#submit-signup.btn.btn-primary.btn-form(type='submit') Submit

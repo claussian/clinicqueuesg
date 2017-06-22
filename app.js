@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser';
 import Debug from 'debug';
 import express from 'express';
 import logger from 'morgan';
+import flash from 'express-flash';
 // import favicon from 'serve-favicon';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -12,6 +13,8 @@ import mongoose from 'mongoose';
 import cloudinary from 'cloudinary';
 import multer from 'multer';
 var upload = multer({ dest: './uploads/' });
+var session = require('express-session');
+var passport = require('passport');
 
 // Configure .env path
 dotenv.load({path: '.env'});
@@ -33,7 +36,7 @@ app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
@@ -42,8 +45,17 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
 
+/* passport and session */
+app.use(session( {secret: 'secret-name'}));
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
+
+/* Place below middleware parsers */
 app.use('/', clinicRoutes);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -65,6 +77,7 @@ app.use((err, req, res, next) => {
 
 // Handle uncaughtException
 process.on('uncaughtException', (err) => {
+  console.log(err);
   debug('Caught exception: %j', err);
   process.exit(1);
 });
