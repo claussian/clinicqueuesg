@@ -1,48 +1,68 @@
-import Clinic from '../models/GeoJSON'
+import Polyclinic from '../models/Polyclinic'
+import Privateclinic from '../models/Privateclinic'
 
-/***********************/
-/* Return the GeoJSON */
-/**********************/
+/*************************/
+/* Render pages */
+/*************************/
 
 exports.index = (req, res) => {
-    res.render('index')
+    res.render('index');
 }
 
-exports.listJSON = (req, res) => { // to return JSON object
-  Clinic.find({}, (err, clinics) => {
+exports.login = (req, res) => {
+    res.render('login');
+}
+
+
+
+/********************************/
+/* Return array of JSON objects */
+/********************************/
+/* Return all Polyclinics JSON  */
+exports.listPoly = (req, res) => { // to return JSON object
+  Polyclinic.find({}, (err, clinics) => {
     if (err) {
       console.log(err);
     }
     //console.log(clinics)
-    res.send(clinics)
+    res.send(clinics);
     //res.json(clinics) // only for POST
   });
 }
+/* Return all Private clinics JSON */
+exports.listPrivate = (req, res) => {
+  Privateclinic.find({}, (err, clinics) => {
+    if (err) {
+      console.log(err);
+    }
+    res.send(clinics);
+  });
+}
 
+/* Return all Private clinic names JSON */
+exports.listPolyNames = (req, res) => {
+  Polyclinic.find({},'properties.name_full', (err, clinics) => {
+    if (err) {
+      console.log(err);
+    }
+    res.send(clinics);
+  });
+}
 
-// let testclinic = new Clinic ({
-//   type: 'Feature',
-//   'geometry': {
-//       type: 'Point',
-//       'coordinates': [103.945916, 1.357416]
-//   },
-//   'properties' : {
-//     'name': 'TEST',
-//     'name_full': 'Test Polyclinic',
-//     'time_created': new Date('2017-06-19 15:43:34.081701'),
-//     'queue': '140',
-//     'cluster': 'SHP',
-//     'waitTime': '2 hours 20 mins'
-//   }
-// })
-// console.log(testclinic);
-//
-// /* Save to db */
-//
-// testclinic.save((err) =>{
-//   if(err) {
-//     console.log(err.message);
-//     return;
-//   }
-//   console.log('Testclinic saved');
-// })
+/* Return all Private clinic names JSON */
+exports.listPrivateNames = (req, res) => {
+  Privateclinic.find({},'properties.Name', (err, clinics) => {
+    if (err) {
+      console.log(err);
+    }
+    res.send(clinics);
+  });
+}
+
+/*********************************/
+/* Update photos in private clinic*/
+/*********************************/
+
+// cloudinary.uploader.upload("my_picture.jpg", function(result) {
+//   console.log(result)
+// });

@@ -68,22 +68,26 @@ function eqfeed_callback(results) {
         map: map,
         icon: getCircle(queue)
       });
-      google.maps.event.addListener(marker, 'click', function(){
+      google.maps.event.addListener(marker, 'mouseover', function(){
         infowindow.close(); // Close previously opened infowindow
         infowindow.setContent(infopanel);
         infowindow.open(map, marker);
       });
     }
+
     var infowindow = new google.maps.InfoWindow();
     for (var i = 0; i < results.features.length; i++) {
           var coords = results.features[i].geometry.coordinates;
           var queue = parseInt(results.features[i].properties.queue);
+          var datetime = new Date(results.features[i].properties.time_created);
+          time = datetime.toTimeString().split(' ')[0];
+          date = datetime.toDateString().split(' ');
 
           // Add panel content on hover
           var infopanel = $('#infopanel').html();
           infopanel = infopanel.replace('{{clinicname}}', results.features[i].properties.name_full);
           infopanel = infopanel.replace('{{queue}}',queue).replace('{{waittime}}',results.features[i].properties.waitTime);
-
+          infopanel = infopanel.replace('{{time_created}}',time + ' ' + date[0] + ' ' + date[1] + ' ' + date[2]);
           // /* Point a new reference to new infopanel */
           // var clone = JSON.parse(JSON.stringify(infopanel));
           // iw.push(clone);
@@ -103,6 +107,21 @@ $(document).ready(function() {
   initMap();
   // async='', defer='',
 
-  /* init FeatureCollection */
+  /* Set up event listeners */
+  // $('.navbar-brand').on('click', function(event){
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: '/'
+  //   });
+  // });
+  //
+  // $('.goto-login').on('click', function(event){
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: '/login'
+  //   }).done(function(response){
+  //     console.log('success go to login',response);
+  //   });
+  // });
 
 });

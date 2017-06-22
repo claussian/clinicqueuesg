@@ -4,13 +4,14 @@ block content
   nav.navbar.navbar-default.navbar-static-top
     .container-fluid
       .navbar-header
-        a.navbar-brand(href='#') ClinicQueues
+        a.navbar-brand(href='/') ClinicQueues
           span.sg SG
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         .nav.navbar-nav.navbar-right
           p
             | At a clinic?
-            a(href='#')  Submit a queue report
+            a.goto-login(href='/login')  Submit a queue report
   #map-container.container-fluid
     .row
       #map.col-sm-12
+      

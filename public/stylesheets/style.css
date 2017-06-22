@@ -45,6 +45,25 @@ a, a:hover {
   color: #00B7FF;
 }
 
+a:active {
+  color: #8b0a50;
+}
+
+.form-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.legend-container {
+  text-align: center;
+}
+
+.btn-form {
+  margin-right: 10px;
+}
+
+
+
 .pin {
     width: 20px;
     height: 20px;

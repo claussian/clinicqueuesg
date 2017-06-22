@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 //import GeoJSON from 'mongoose-geojson-schema';
 
-const featureSchema = new mongoose.Schema({
+const polyFeatureSchema = new mongoose.Schema({
   type: {type: String},
   'geometry' : {
       type: {type: String},
@@ -25,7 +25,7 @@ const featureSchema = new mongoose.Schema({
 /* mongoose looks for the plural in the db (currentqueues) ************************/
 /* .model creates a copy of Schema ************************************************/
 
-const Clinic = mongoose.model('Clinic', featureSchema, 'clinics');
+const Clinic = mongoose.model('Clinic', polyFeatureSchema, 'clinics');
 
 /* Export the model */
 module.exports = Clinic;

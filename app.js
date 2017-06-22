@@ -9,6 +9,9 @@ import dotenv from 'dotenv';
 import lessMiddleware from 'less-middleware';
 import clinicRoutes from './routes/index';
 import mongoose from 'mongoose';
+import cloudinary from 'cloudinary';
+import multer from 'multer';
+var upload = multer({ dest: './uploads/' });
 
 // Configure .env path
 dotenv.load({path: '.env'});

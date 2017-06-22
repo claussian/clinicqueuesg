@@ -7,8 +7,20 @@ const router = express.Router();
 /* GET index page */
 router.get('/', clinicsController.index);
 
-/* GET clinics data */
-router.get('/load', clinicsController.listJSON)
+/* GET login page */
+router.get('/login', clinicsController.login);
+
+/* GET polyclinics JSON */
+router.get('/load', clinicsController.listPoly);
+
+/* GET private clinics JSON */
+router.get('/loadPrivate', clinicsController.listPrivate);
+
+/* GET polyclinic names JSON */
+router.get('/loadPolyNames', clinicsController.listPolyNames);
+
+/* GET private clinic names JSON */
+router.get('/loadPrivateNames', clinicsController.listPrivateNames);
 
 module.exports = router;
 
