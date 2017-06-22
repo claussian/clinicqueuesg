@@ -16,7 +16,7 @@ block content
       .col-md-4.queue-report
         .container-fluid.form-container
           .row.well.well-lg
-            form.form-horizontal
+            form.form-horizontal(action='/report', method='POST', enctype='multipart/form-data')
               fieldset
                 legend.legend-container Submit a clinic queue report!
                 label.control-label(for='inputPassword') Clinic name
@@ -24,16 +24,21 @@ block content
                   .typeahead__container
                     .typeahead__field
                       span.typeahead__query
-                        input.js-typeahead(name='q', type='search', autocomplete='off')
+                        input#query-clinic.js-typeahead(name='q', autocomplete='off')
                       span.typeahead__button
-                        button(type='submit')
+                        button#query-button(type='button')
                           span.typeahead__search-icon
-                .form-group
-                  label.control-label(for='inputPassword') Password
-                    input#inputPhoto.form-control(type='image', placeholder='Password', name='password')
+                .form-group.form-group-photo
+                  label.control-label(for='inputPassword') Upload a clear photo of the clinic queue
+                  .input-group
+                    label.input-group-btn
+                      span.btn.btn-primary
+                        | Browse… 
+                        input(type='file', style='display: none;', multiple='')
+                    input.form-control.file-display(type='text', readonly='')
                 .form-group
                   .col-lg-12
                     button.btn.btn-default.btn-form(type='reset') Cancel
-                    button.btn.btn-primary.btn-form(type='submit') Submit
+                    button.btn.btn-info.btn-form(type='submit') Submit
           
         

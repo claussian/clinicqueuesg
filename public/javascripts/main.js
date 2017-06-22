@@ -103,10 +103,71 @@ function eqfeed_callback(results) {
 
 }
 
-
-function initFeatures() {
-
+/* GET private clinic names */
+function initTypeAheadPrivateClinics() {
+  $.ajax({
+    method: 'GET',
+    url: '/loadPrivateNames'
+  }).done(function (data) {
+    var newdata = [];
+    data.forEach(function(item, index){
+      newdata.push(item.properties.Name);
+    });
+    $.typeahead({
+      input: ".js-typeahead",
+      order: "asc",
+      source: newdata
+    });
+  });
 }
+ /* reverse geocode a clinic coordinate */
+function codeAddress() {
+    var address = $('#query-clinic').val();
+    // console.log(address);
+    $.ajax({
+      method:'GET',
+      url: '/loadPrivate'
+    }).done(function (data) {
+      var clinic = data.filter(function(elem){
+        return elem.properties.Name == address;
+      });
+      console.log(clinic[0].geometry.coordinates);
+      var coord = clinic[0].geometry.coordinates;
+      var latlng = {lat: parseFloat(coord[1]), lng: parseFloat(coord[0])};
+
+      geocoder.geocode({'location': latlng}, function(results, status) {
+        if (status === 'OK') {
+          if (results[1]) {
+            map.setZoom(15);
+            var marker = new google.maps.Marker({
+              position: latlng,
+              map: map,
+              icon: '../images/chas-transparent-small.png'
+            });
+            var newll = new google.maps.LatLng(latlng);
+            map.panTo(newll);
+          } else {
+            window.alert('No results found');
+          }
+        }
+        else {
+          window.alert('Geocoder failed due to: ' + status);
+        }
+      });
+    });
+    // geocoder = new google.maps.Geocoder();
+    // geocoder.geocode( { 'address': address}, function(results, status) {
+    //   if (status == 'OK') {
+    //     map.setCenter(results[0].geometry.location);
+    //     var marker = new google.maps.Marker({
+    //         map: map,
+    //         position: results[0].geometry.location
+    //     });
+    //   } else {
+    //     alert('Geocode was not successful for the following reason: ' + status);
+    //   }
+    //});
+  }
 
 /* Initialise document for JQuery */
 $(document).ready(function() {
@@ -114,6 +175,8 @@ $(document).ready(function() {
   if(mapExists()) {
     initMap();
   }
+  /* Set up typeahead */
+  initTypeAheadPrivateClinics();
 
   /* Set up event listeners */
 
@@ -133,6 +196,7 @@ $(document).ready(function() {
     $('#password-validate').removeClass('has-error');
     $('#password-validate').removeClass('has-success');
   });
+
   /* Submit new user */
   $('#submit-signup').on('click', function(event) {
     var email = $('#inputEmail-signup').val();
@@ -149,5 +213,19 @@ $(document).ready(function() {
       console.log('done');
     });
   });
+
+  /* Select a file and update field*/
+  $(':file').on('fileselect', function() {
+    var input = $(this);
+    var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    $('.file-display').val(label);
+  });
+
+  /* Geocode the added clinics */
+  $('#query-button').on('click', function(event) {
+    codeAddress();
+  });
+
+
 
 });
