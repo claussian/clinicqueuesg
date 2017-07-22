@@ -10,6 +10,7 @@ import dotenv from 'dotenv';
 import lessMiddleware from 'less-middleware';
 import clinicRoutes from './routes/index';
 import mongoose from 'mongoose';
+import MongoOplog from 'mongo-oplog';
 import cloudinary from 'cloudinary';
 import multer from 'multer';
 var upload = multer({ dest: './uploads/' });
@@ -26,6 +27,7 @@ mongoose.connection.on('error', (err) => {
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
 });
+export const oplog = MongoOplog(process.env.MONGODB_URI);
 
 const app = express();
 const debug = Debug('clinicqueuesg:app');

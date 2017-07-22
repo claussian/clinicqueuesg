@@ -23,6 +23,7 @@
     "express-session": "^1.15.3",
     "jquery-typeahead": "^2.8.0",
     "less-middleware": "^2.2.0",
+    "mongo-oplog": "^2.0.2",
     "mongoose": "^4.10.7",
     "mongoose-geojson-schema": "^2.1.2",
     "morgan": "~1.7.0",

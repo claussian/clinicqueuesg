@@ -1,7 +1,7 @@
 import Polyclinic from '../models/Polyclinic'
 import Privateclinic from '../models/Privateclinic'
 var cloudinary = require('cloudinary');
-
+import oplog from '../app';
 /*************************/
 /* Render pages */
 /*************************/
@@ -22,6 +22,9 @@ exports.report = (req, res) => {
     res.render('report');
 }
 
+oplog.on('update', (doc) => {
+  console.log(doc);
+})
 /********************************/
 /* Return array of JSON objects */
 /********************************/
