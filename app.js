@@ -27,8 +27,7 @@ mongoose.connection.on('error', (err) => {
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
 });
-export const oplog = MongoOplog(process.env.MONGODB_URI);
-oplog.filter('clinics');
+export const oplog = MongoOplog(process.env.MONGODB_URI, { ns: 'polyclinic.clinics' });
 oplog.tail();
 oplog.on('update', (doc) => {
   console.log(doc);
