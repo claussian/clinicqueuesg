@@ -22,9 +22,7 @@ exports.report = (req, res) => {
     res.render('report');
 }
 
-oplog.on('update', (doc) => {
-  console.log(doc);
-})
+
 /********************************/
 /* Return array of JSON objects */
 /********************************/

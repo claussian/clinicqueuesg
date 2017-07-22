@@ -28,6 +28,9 @@ mongoose.connection.on('error', (err) => {
   process.exit();
 });
 export const oplog = MongoOplog(process.env.MONGODB_URI);
+oplog.on('update', (doc) => {
+  console.log(doc);
+})
 
 const app = express();
 const debug = Debug('clinicqueuesg:app');
