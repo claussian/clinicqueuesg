@@ -28,6 +28,7 @@ mongoose.connection.on('error', (err) => {
   process.exit();
 });
 export const oplog = MongoOplog(process.env.MONGODB_URI);
+oplog.filter('clinics');
 oplog.tail();
 oplog.on('update', (doc) => {
   console.log(doc);
